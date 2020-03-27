@@ -1,0 +1,3 @@
+C:/Users/ttoto/CLionProjects/Focus/cmake-build-debug/CMakeFiles/Focus.dir
+C:/Users/ttoto/CLionProjects/Focus/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/ttoto/CLionProjects/Focus/cmake-build-debug/CMakeFiles/rebuild_cache.dir
