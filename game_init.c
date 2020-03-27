@@ -4,22 +4,28 @@
 
 void initialize_players(player players[PLAYERS_NUM])
 {
+    //Declaring two variables of type player to store player information
     player red_Player, green_Player;
 
+    //Taking in the name of the red player
     printf("Please enter red player name: ");
     scanf("%s", red_Player.pname);
 
+    //Taking in the name of the green player
     printf("Please enter green player name: ");
     scanf("%s", green_Player.pname);
 
+    //Setting the remaining variables of the red_Player struct
     red_Player.player_Colour = RED;
     red_Player.dom_Pieces = 0;
     red_Player.res_Pieces = 0;
 
+    //Setting the remaining variables of the green_Player struct
     green_Player.player_Colour = GREEN;
     green_Player.dom_Pieces = 0;
     green_Player.res_Pieces = 0;
 
+    //Storing red and green players in players array
     players[0] = red_Player;
     players[1] = green_Player;
 }

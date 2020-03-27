@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "input_output.h"
 
-/* FUnction to print the board:
+/* Function to print the board:
  * Invalid Squares are printed as | - |
  * Valid empty squares are printed as |   |
  * Valid squares with a GREEN piece are printed as | G |
