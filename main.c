@@ -1,9 +1,8 @@
-
 #include "input_output.h"
 
 
-int main() {
-
+int main()
+{
     // declaration of the players and the board
     player players[PLAYERS_NUM];
     square board[BOARD_SIZE][BOARD_SIZE];

@@ -1,4 +1,3 @@
-
 #ifndef FOCUS_GAME_INIT_H
 #define FOCUS_GAME_INIT_H
 
@@ -9,36 +8,35 @@
 #define PLAYERS_NUM 2
 
 //colors that a piece can have
-typedef enum color {
+typedef enum colour
+{
     RED,
     GREEN
-}color;
+}colour;
 
 // Square types
 //INVALID: squares that are on the sides and where no piece can be placed
 //VALID: squares where it is possible to place a piece or a stack
-typedef enum square_type {
+typedef enum square_type
+{
     VALID,
     INVALID
 }square_type;
 
 //Player
-typedef struct player{
-    //the color associated with the player
-    color player_color;
-    /*
-     * A player should also be characterized by:
-     * name,
-     * number of adversary's pieces captured,
-     * number of own pieces kept.
-     *
-    */
+typedef struct player
+{
+    char pname[20];
+    enum colour player_Colour;
+    int dom_Pieces;
+    int res_Pieces;
 }player;
 
 // A piece
-typedef struct piece {
+typedef struct piece
+{
     //the color associated with a piece
-    color p_color;
+    colour p_color;
 
     // This is a pointer to the next pieces
     // to create a stack. For this lab you do not have to think too much about it.
@@ -47,7 +45,8 @@ typedef struct piece {
 }piece;
 
 // A Square of the board
-typedef struct square {
+typedef struct square
+{
     // type of the square (VALID/INVALID)
     square_type type;
 

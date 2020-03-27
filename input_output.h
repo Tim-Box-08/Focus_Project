@@ -1,4 +1,3 @@
-
 #ifndef FOCUS_INPUT_OUTPUT_H
 #define FOCUS_INPUT_OUTPUT_H
 
