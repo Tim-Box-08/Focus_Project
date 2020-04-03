@@ -89,6 +89,12 @@
 		<Unit filename="C:/Users/ttoto/CLionProjects/Focus/main.c">
 			<Option target="Focus"/>
 		</Unit>
+		<Unit filename="C:/Users/ttoto/CLionProjects/Focus/turn.c">
+			<Option target="Focus"/>
+		</Unit>
+		<Unit filename="C:/Users/ttoto/CLionProjects/Focus/turn.h">
+			<Option target="Focus"/>
+		</Unit>
 		<Unit filename="C:/Users/ttoto/CLionProjects/Focus/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

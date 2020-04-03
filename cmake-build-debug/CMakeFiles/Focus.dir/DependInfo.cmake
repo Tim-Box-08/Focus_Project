@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "C:/Users/ttoto/CLionProjects/Focus/game_init.c" "C:/Users/ttoto/CLionProjects/Focus/cmake-build-debug/CMakeFiles/Focus.dir/game_init.c.obj"
   "C:/Users/ttoto/CLionProjects/Focus/input_output.c" "C:/Users/ttoto/CLionProjects/Focus/cmake-build-debug/CMakeFiles/Focus.dir/input_output.c.obj"
   "C:/Users/ttoto/CLionProjects/Focus/main.c" "C:/Users/ttoto/CLionProjects/Focus/cmake-build-debug/CMakeFiles/Focus.dir/main.c.obj"
+  "C:/Users/ttoto/CLionProjects/Focus/turn.c" "C:/Users/ttoto/CLionProjects/Focus/cmake-build-debug/CMakeFiles/Focus.dir/turn.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

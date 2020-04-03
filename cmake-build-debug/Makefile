@@ -203,6 +203,33 @@ main.c.s:
 	$(MAKE) -f CMakeFiles\Focus.dir\build.make CMakeFiles/Focus.dir/main.c.s
 .PHONY : main.c.s
 
+turn.obj: turn.c.obj
+
+.PHONY : turn.obj
+
+# target to build an object file
+turn.c.obj:
+	$(MAKE) -f CMakeFiles\Focus.dir\build.make CMakeFiles/Focus.dir/turn.c.obj
+.PHONY : turn.c.obj
+
+turn.i: turn.c.i
+
+.PHONY : turn.i
+
+# target to preprocess a source file
+turn.c.i:
+	$(MAKE) -f CMakeFiles\Focus.dir\build.make CMakeFiles/Focus.dir/turn.c.i
+.PHONY : turn.c.i
+
+turn.s: turn.c.s
+
+.PHONY : turn.s
+
+# target to generate assembly for a file
+turn.c.s:
+	$(MAKE) -f CMakeFiles\Focus.dir\build.make CMakeFiles/Focus.dir/turn.c.s
+.PHONY : turn.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -221,6 +248,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... turn.obj
+	@echo ... turn.i
+	@echo ... turn.s
 .PHONY : help
 
 
