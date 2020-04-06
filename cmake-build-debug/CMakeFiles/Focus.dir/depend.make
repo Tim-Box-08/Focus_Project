@@ -11,4 +11,9 @@ CMakeFiles/Focus.dir/input_output.c.obj: ../input_output.h
 CMakeFiles/Focus.dir/main.c.obj: ../game_init.h
 CMakeFiles/Focus.dir/main.c.obj: ../input_output.h
 CMakeFiles/Focus.dir/main.c.obj: ../main.c
+CMakeFiles/Focus.dir/main.c.obj: ../turn.h
+
+CMakeFiles/Focus.dir/turn.c.obj: ../game_init.h
+CMakeFiles/Focus.dir/turn.c.obj: ../turn.c
+CMakeFiles/Focus.dir/turn.c.obj: ../turn.h
 

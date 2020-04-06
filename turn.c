@@ -1,20 +1,19 @@
 //
 // Created by ttoto on 03/04/2020.
 //
-#include "game_init.c"
+#include "game_init.h"
 #include "turn.h"
 #include <stdio.h>
 #include <stdbool.h>
 
-bool moveCheck(int moveType, int curRow, int curCol)
+bool moveCheck(int moveType, int curRow, int curCol);
+void push(square squareCur, square squareAdd);
 
-void playerTurn(player currentPlayer, square board[BOARD_SIZE][BOARD_SIZE])
-{
-    int k=0, t=0, h=0, moveNum, moveType, curRow, curCol;
+void playerTurn(player currentPlayer, square board[BOARD_SIZE][BOARD_SIZE]) {
+    int k = 0, t = 0, h = 0, moveNum, moveType, curRow, curCol;
 
     //Allowing the player to select a piece
-    while(h==0)
-    {
+    while (h == 0) {
         printf("Please select a row:");
         scanf("%d", &k);
         printf("Please select a column:");
@@ -22,20 +21,21 @@ void playerTurn(player currentPlayer, square board[BOARD_SIZE][BOARD_SIZE])
 
         if (board[k][t].type == VALID && board[k][t].stack->p_color == currentPlayer.player_Colour) {
             h = 1;
-        }
-        else{
-            printf("Please select a valid square.\n Valid squares have the same colour as the current player and are valid positions on the board");
+        } else {
+            printf("Please select a valid square.\n Valid squares have the same colour as the current player and are valid positions on the board\n");
         }
     }
 
     curRow = k;
     curCol = t;
 
-    for(moveNum=0;moveNum<board[k][t].num_pieces;moveNum++)
+    for (moveNum = 0; moveNum < board[k][t].num_pieces; moveNum++)
     {
+        printf("You are currently at position [%d][%d]\n", curRow, curCol);
         printf("Please select a direction in which to move the piece\nEnter 1 for left, 2 for right, 3 for up and 4 for down:");
         scanf("%d", &moveType);
-        if(moveCheck(moveType, curRow, curCol) == true) {
+
+        if (moveCheck(moveType, curRow, curCol) == true) {
             switch (moveType) {
                 case 1:
                     curRow = curRow;
@@ -54,14 +54,21 @@ void playerTurn(player currentPlayer, square board[BOARD_SIZE][BOARD_SIZE])
                     curCol = curCol;
             }
             continue;
-        }
-        else
-        {
+        } else {
             printf("Selected move is invalid\n");
             moveNum -= 1;
             continue;
         }
     }
+
+    printf("Calling push function\n");
+    push(board[curRow][curCol], board[k][t]);
+}
+
+void push(square squareCur, square squareAdd)
+{
+    squareCur.stack->next = squareAdd.stack;
+    squareCur.num_pieces += squareAdd.num_pieces;
 }
 
 bool moveCheck(int moveType, int curRow, int curCol)
@@ -205,5 +212,5 @@ bool moveCheck(int moveType, int curRow, int curCol)
            break;
    }
 
-   return validMove;
+    return validMove;
 }

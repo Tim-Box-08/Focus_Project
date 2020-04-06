@@ -31,7 +31,7 @@ void initialize_players(player players[PLAYERS_NUM])
 }
 
 //Set Invalid Squares (where it is not possible to place stacks)
-set_invalid(square * s)
+void set_invalid(square * s)
 {
 s->type = INVALID;
 s->stack = NULL;
@@ -39,7 +39,7 @@ s->num_pieces = 0;
 }
 
 //Set Empty Squares (with no pieces/stacks)
-set_empty(square * s)
+void set_empty(square * s)
 {
 s->type = VALID;
 s->stack = NULL;
@@ -47,7 +47,7 @@ s->num_pieces = 0;
 }
 
 //Set squares  with a GREEN piece
-set_green(square * s)
+void set_green(square * s)
 {
 s->type = VALID;
 s->stack = (piece *) malloc (sizeof(piece));
@@ -57,7 +57,7 @@ s->num_pieces = 1;
 }
 
 //Set squares with a RED piece
-set_red(square * s)
+void set_red(square * s)
 {
 s->type = VALID;
 s->stack = (piece *) malloc (sizeof(piece));
