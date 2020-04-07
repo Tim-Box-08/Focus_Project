@@ -8,13 +8,15 @@
 
 C:/Users/ttoto/CLionProjects/Focus/game_init.h
 
-C:/Users/ttoto/CLionProjects/Focus/input_output.c
-stdio.h
--
-input_output.h
-C:/Users/ttoto/CLionProjects/Focus/input_output.h
-
-C:/Users/ttoto/CLionProjects/Focus/input_output.h
+C:/Users/ttoto/CLionProjects/Focus/turn.c
 game_init.h
 C:/Users/ttoto/CLionProjects/Focus/game_init.h
+turn.h
+C:/Users/ttoto/CLionProjects/Focus/turn.h
+stdio.h
+-
+stdbool.h
+-
+
+C:/Users/ttoto/CLionProjects/Focus/turn.h
 

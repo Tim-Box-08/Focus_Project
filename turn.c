@@ -7,7 +7,7 @@
 #include <stdbool.h>
 
 bool moveCheck(int moveType, int curRow, int curCol);
-void push(square squareCur, square squareAdd);
+void merge(square board[BOARD_SIZE][BOARD_SIZE],int k, int t, int curRow, int curCol);
 
 void playerTurn(player currentPlayer, square board[BOARD_SIZE][BOARD_SIZE]) {
     int k = 0, t = 0, h = 0, moveNum, moveType, curRow, curCol;
@@ -39,18 +39,18 @@ void playerTurn(player currentPlayer, square board[BOARD_SIZE][BOARD_SIZE]) {
             switch (moveType) {
                 case 1:
                     curRow = curRow;
-                    curCol -= curCol;
+                    curCol -= 1;
                     break;
                 case 2:
                     curRow = curRow;
-                    curCol += curCol;
+                    curCol += 1;
                     break;
                 case 3:
-                    curRow -= curRow;
+                    curRow -= 1;
                     curCol = curCol;
                     break;
                 case 4:
-                    curRow += curRow;
+                    curRow += 1;
                     curCol = curCol;
             }
             continue;
@@ -62,13 +62,22 @@ void playerTurn(player currentPlayer, square board[BOARD_SIZE][BOARD_SIZE]) {
     }
 
     printf("Calling push function\n");
-    push(board[curRow][curCol], board[k][t]);
+    merge(board, k, t, curRow, curCol);
+    board[k][t].stack = NULL;
+    board[k][t].num_pieces = 0;
 }
 
-void push(square squareCur, square squareAdd)
+void merge(square board[BOARD_SIZE][BOARD_SIZE], int k, int t, int curRow, int curCol)
 {
-    squareCur.stack->next = squareAdd.stack;
-    squareCur.num_pieces += squareAdd.num_pieces;
+    piece * curr;
+    curr = board[k][t].stack;
+    while(curr->next !=NULL)
+    {
+        curr = curr->next;
+    }
+    curr->next = board[curRow][curCol].stack;
+    board[curRow][curCol].stack = board[k][t].stack;
+    board[curRow][curCol].num_pieces += board[k][t].num_pieces;
 }
 
 bool moveCheck(int moveType, int curRow, int curCol)
