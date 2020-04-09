@@ -11,7 +11,7 @@
 
 void print_board(square board[BOARD_SIZE][BOARD_SIZE])
 {
-    printf("        ****** The Board ******        \n");
+    printf("\n        ****** The Board ******        \n");
     for(int i = 0; i < BOARD_SIZE; i ++)
     {
         for (int j = 0; j < BOARD_SIZE; j++)
@@ -31,4 +31,5 @@ void print_board(square board[BOARD_SIZE][BOARD_SIZE])
         }
         printf("|\n");
     }
+    printf("\n");
 }

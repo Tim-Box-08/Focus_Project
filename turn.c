@@ -12,11 +12,20 @@ void merge(square board[BOARD_SIZE][BOARD_SIZE],int k, int t, int curRow, int cu
 
 void playerTurn(player currentPlayer, square board[BOARD_SIZE][BOARD_SIZE])
 {
-    int k = 0, t = 0, h = 0, moveNum, moveType, curRow, curCol;
+    int k = 0, t = 0, h = 0, moveNum, moveType, curRow, curCol, choice;
+
+    printf("It is currently %s's turn\n", currentPlayer.pname);
 
     //Allowing the player to select a piece
     //Statement will loop until a valid piece is selected
     while (h == 0) {
+        if(currentPlayer.player_Colour == RED)
+        {
+            printf("Select a RED piece\n");
+        } else{
+            printf("Select a GREEN piece\n");
+        }
+
         printf("Please select a row:");
         scanf("%d", &k);
         printf("Please select a column:");
@@ -34,44 +43,50 @@ void playerTurn(player currentPlayer, square board[BOARD_SIZE][BOARD_SIZE])
     curCol = t;
 
     //Number of square a piece will move is decide by size of stack
-    for (moveNum = 0; moveNum < board[k][t].num_pieces; moveNum++)
-    {
+    for (moveNum = 0; moveNum < board[k][t].num_pieces; moveNum++) {
         printf("You are currently at position [%d][%d]\n", curRow, curCol);
-        printf("Please select a direction in which to move the piece\nEnter 1 for left, 2 for right, 3 for up and 4 for down:");
-        scanf("%d", &moveType);
-
-        //Cursor will move around the board based on the direction a player wishes to move
-        if (moveCheck(moveType, curRow, curCol) == true) {
-            switch (moveType) {
-                case 1:
-                    curRow = curRow;
-                    curCol -= 1;
-                    break;
-                case 2:
-                    curRow = curRow;
-                    curCol += 1;
-                    break;
-                case 3:
-                    curRow -= 1;
-                    curCol = curCol;
-                    break;
-                case 4:
-                    curRow += 1;
-                    curCol = curCol;
-            }
-            continue;
+        printf("Would you like to continue moving?\nType 1 to continue moving or 2 to end movement:");
+        scanf("%d", &choice);
+        if (choice == 2) {
+            break;
         }
-        //Statement will trigger if selected move is not a valid one based on the cursors current position
-        else {
-            printf("Selected move is invalid\n");
-            moveNum -= 1;
-            continue;
+        else{
+            printf("Please select a direction in which to move the piece\nEnter 1 for left, 2 for right, 3 for up and 4 for down:");
+            scanf("%d", &moveType);
+
+            //Cursor will move around the board based on the direction a player wishes to move
+            if (moveCheck(moveType, curRow, curCol) == true) {
+                switch (moveType) {
+                    case 1:
+                        curRow = curRow;
+                        curCol -= 1;
+                        break;
+                    case 2:
+                        curRow = curRow;
+                        curCol += 1;
+                        break;
+                    case 3:
+                        curRow -= 1;
+                        curCol = curCol;
+                        break;
+                    case 4:
+                        curRow += 1;
+                        curCol = curCol;
+                }
+                continue;
+            }
+                //Statement will trigger if selected move is not a valid one based on the cursors current position
+            else {
+                printf("Selected move is invalid\n");
+                moveNum -= 1;
+                continue;
+            }
         }
     }
 
     merge(board, k, t, curRow, curCol);//Call to merge function which will combine the two identified stacks
     board[k][t].stack = NULL;//Resets the pointer in the now vacant board square to NULL
-    board[k][t].num_pieces = 0;//Resets the conter for the number of pieces on the now vacant board square to 0
+    board[k][t].num_pieces = 0;//Resets the counter for the number of pieces on the now vacant board square to 0
 }
 
 //Function to merge two stacks together
