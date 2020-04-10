@@ -14,14 +14,14 @@ int main()
 
     print_board(board);//Call to print_board function which will print the initialised board
 
-    for(int t=0;t<5;t++)
+    for(int t=0;t<10;t++)
     {
         if(t%2 == 0)
         {
-            playerTurn(players[0], board);
+            playerTurn(players, board, 0);
         }
         else{
-            playerTurn(players[1], board);
+            playerTurn(players, board, 1);
         }
 
         print_board(board);

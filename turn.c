@@ -5,21 +5,23 @@
 #include "turn.h"
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 //Function prototypes
 bool moveCheck(int moveType, int curRow, int curCol);
 void merge(square board[BOARD_SIZE][BOARD_SIZE],int k, int t, int curRow, int curCol);
+void removeExcess(square board[BOARD_SIZE][BOARD_SIZE], int curRow, int curCol, player players[2], int curPlayer);
 
-void playerTurn(player currentPlayer, square board[BOARD_SIZE][BOARD_SIZE])
+void playerTurn(player players[2], square board[BOARD_SIZE][BOARD_SIZE], int curPlayer)
 {
-    int k = 0, t = 0, h = 0, moveNum, moveType, curRow, curCol, choice;
+    int k = 0, t = 0, h = 0, moveNum, moveType, curRow, curCol;
 
-    printf("It is currently %s's turn\n", currentPlayer.pname);
+    printf("It is currently %s's turn\n", players[curPlayer].pname);
 
     //Allowing the player to select a piece
     //Statement will loop until a valid piece is selected
     while (h == 0) {
-        if(currentPlayer.player_Colour == RED)
+        if(players[curPlayer].player_Colour == RED)
         {
             printf("Select a RED piece\n");
         } else{
@@ -31,7 +33,7 @@ void playerTurn(player currentPlayer, square board[BOARD_SIZE][BOARD_SIZE])
         printf("Please select a column:");
         scanf("%d", &t);
 
-        if (board[k][t].type == VALID && board[k][t].stack->p_color == currentPlayer.player_Colour) {
+        if (board[k][t].type == VALID && board[k][t].stack->p_color == players[curPlayer].player_Colour) {
             h = 1;
         } else {
             printf("Please select a valid square.\n Valid squares have the same colour as the current player and are valid positions on the board\n");
@@ -42,51 +44,53 @@ void playerTurn(player currentPlayer, square board[BOARD_SIZE][BOARD_SIZE])
     curRow = k;
     curCol = t;
 
-    //Number of square a piece will move is decide by size of stack
+    //Number of squares a piece will move is decide by size of stack
     for (moveNum = 0; moveNum < board[k][t].num_pieces; moveNum++) {
         printf("You are currently at position [%d][%d]\n", curRow, curCol);
-        printf("Would you like to continue moving?\nType 1 to continue moving or 2 to end movement:");
-        scanf("%d", &choice);
-        if (choice == 2) {
-            break;
-        }
-        else{
-            printf("Please select a direction in which to move the piece\nEnter 1 for left, 2 for right, 3 for up and 4 for down:");
-            scanf("%d", &moveType);
 
-            //Cursor will move around the board based on the direction a player wishes to move
-            if (moveCheck(moveType, curRow, curCol) == true) {
-                switch (moveType) {
-                    case 1:
-                        curRow = curRow;
-                        curCol -= 1;
-                        break;
-                    case 2:
-                        curRow = curRow;
-                        curCol += 1;
-                        break;
-                    case 3:
-                        curRow -= 1;
-                        curCol = curCol;
-                        break;
-                    case 4:
-                        curRow += 1;
-                        curCol = curCol;
-                }
+        printf("Please select a direction in which to move the piece\nEnter 1 for left, 2 for right, 3 for up and 4 for down or 5 to end movement at current position:");
+        scanf("%d", &moveType);
+
+        //Cursor will move around the board based on the direction a player wishes to move
+        if (moveCheck(moveType, curRow, curCol) == true) {
+            switch (moveType) {
+                case 1:
+                    curRow = curRow;
+                    curCol -= 1;
+                    break;
+                case 2:
+                    curRow = curRow;
+                    curCol += 1;
+                    break;
+                case 3:
+                    curRow -= 1;
+                    curCol = curCol;
+                    break;
+                case 4:
+                    curRow += 1;
+                    curCol = curCol;
+                    break;
+                case 5:
+                    moveNum = 5;
+                    break;
+            }
                 continue;
             }
-                //Statement will trigger if selected move is not a valid one based on the cursors current position
-            else {
-                printf("Selected move is invalid\n");
-                moveNum -= 1;
-                continue;
-            }
+        //Statement will trigger if selected move is not a valid one based on the cursors current position
+        else {
+            printf("Selected move is invalid\n");
+            moveNum -= 1;
+            continue;
         }
     }
 
     merge(board, k, t, curRow, curCol);//Call to merge function which will combine the two identified stacks
     board[k][t].stack = NULL;//Resets the pointer in the now vacant board square to NULL
     board[k][t].num_pieces = 0;//Resets the counter for the number of pieces on the now vacant board square to 0
+    if(board[curRow][curCol].num_pieces>5)
+    {
+        removeExcess(board, curRow, curCol, players, curPlayer);
+    }
 }
 
 //Function to merge two stacks together
@@ -248,4 +252,34 @@ bool moveCheck(int moveType, int curRow, int curCol)
    }
 
     return validMove;//Returns a boolean which reflects the validity of the move
+}
+
+//Function will remove pieces from a stack until it's size is set to 5
+void removeExcess(square board[BOARD_SIZE][BOARD_SIZE], int curRow, int curCol, player players[2], int curPlayer)
+{
+    piece * previous = NULL;//Pointer to piece above that that pointed to by curr
+    piece * curr = NULL;//Pointer to a struct of type piece
+
+    while(board[curRow][curCol].num_pieces > 5)
+    {
+        curr = board[curRow][curCol].stack;//Curr is initialised with the address of the top of the stack
+
+        //While loop will continue execution until the bottom of the stack is reached
+        while (curr->next != NULL)
+        {
+            previous = curr;
+            curr = curr->next;
+        }
+        //Incrementing the number of pieces a player has in reserve
+        if(curr->p_color == players[curPlayer].player_Colour)
+        {
+            players[curPlayer].res_Pieces += 1;
+        }
+        //Incrementing the number of pieces a player had dominated
+        else{
+            players[curPlayer].dom_Pieces += 1;
+        }
+        previous->next = NULL;
+        free(curr);
+    }
 }
