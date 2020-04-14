@@ -279,7 +279,11 @@ void removeExcess(square board[BOARD_SIZE][BOARD_SIZE], int curRow, int curCol, 
         else{
             players[curPlayer].dom_Pieces += 1;
         }
+        //Setting the element above that pointed to by curr as the new bottom of the stack
         previous->next = NULL;
+        //Freeing up the memory pointed to by curr
         free(curr);
+        //Decreasing the count of the number of pieces in the stack
+        board[curRow][curCol].num_pieces -= 1;
     }
 }
