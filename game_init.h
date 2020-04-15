@@ -64,6 +64,12 @@ void initialize_players(player players[PLAYERS_NUM]);
 //Function to create the board
 void initialize_board(square board[BOARD_SIZE][BOARD_SIZE]);
 
+//Function to set a square as red
+void set_red(square * s);
+
+//Function to set a square as green
+void set_green(square * s);
+
 
 
 

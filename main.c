@@ -1,5 +1,6 @@
 #include "input_output.h"
 #include "turn.h"
+#include <stdio.h>
 
 
 int main()
