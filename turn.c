@@ -29,6 +29,7 @@ void playerTurn(player players[2], square board[BOARD_SIZE][BOARD_SIZE], int cur
             printf("Select a GREEN piece\n");
         }
 
+        //Player selects a position on the board
         printf("Please select a row:");
         scanf("%d", &k);
         printf("Please select a column:");
@@ -36,28 +37,28 @@ void playerTurn(player players[2], square board[BOARD_SIZE][BOARD_SIZE], int cur
 
         if (board[k][t].type == VALID)
         {
-            if (board[k][t].stack->p_color == players[curPlayer].player_Colour)
+            if (board[k][t].stack != NULL)
             {
-                h = 1;
-            }
-            //Player selects an empty position on the board
-            else if(board[k][t].stack == NULL && players[curPlayer].dom_Pieces>0)
-            {
-                if(insert(board, players, k, t, curPlayer) == true)
-                {
-                    return;
-                }
-                else
-                {
-                    continue;
+                if (board[k][t].stack->p_color == players[curPlayer].player_Colour) {
+                    h = 1;
+                } else{
+                    printf("\nThe square you selected belongs to the other player\n\nPlease select another square\n");
                 }
             }
-            else{
-                printf("The square you selected belongs to your opponent\n");
+            else
+            {
+                if(players[curPlayer].res_Pieces > 0)
+                {
+                    if (insert(board, players, k, t, curPlayer) == true)
+                    {
+                        return;
+                    } else {
+                        printf("\nYou decided not to place a piece on the board\n\nPlease select another square on the board\n");
+                    }
+                } else{
+                    printf("\nYou do not have pieces in reserve\n\nPlease select another square on the board\n");
+                }
             }
-        }
-        else{
-            printf("Please select a valid square.\n");
         }
     }
 
@@ -67,7 +68,7 @@ void playerTurn(player players[2], square board[BOARD_SIZE][BOARD_SIZE], int cur
 
     //Number of squares a piece will move is decide by size of stack
     for (moveNum = 0; moveNum < board[k][t].num_pieces; moveNum++) {
-        printf("You are currently at position [%d][%d]\n", curRow, curCol);
+        printf("\nYou are currently at position [%d][%d]\n", curRow, curCol);
 
         printf("Please select a direction in which to move the piece\nEnter 1 for left, 2 for right, 3 for up and 4 for down or 5 to end movement at current position:");
         scanf("%d", &moveType);
@@ -96,12 +97,14 @@ void playerTurn(player players[2], square board[BOARD_SIZE][BOARD_SIZE], int cur
                 case 5:
                     moveNum = 5;
                     break;
+                default:
+                    break;
             }
             continue;
         }
         //Statement will trigger if selected move is not a valid one based on the cursors current position
         else{
-            printf("Selected move is invalid\n");
+            printf("\nSelected move is invalid\n");
             moveNum -= 1;
             continue;
         }
@@ -147,6 +150,7 @@ bool moveCheck(int moveType, int curRow, int curCol)
                    if (moveType == 3 || moveType == 1) {
                        validMove = false;
                    }
+                   break;
                case 3:
                    if (moveType == 3) {
                        validMove = false;
@@ -162,6 +166,8 @@ bool moveCheck(int moveType, int curRow, int curCol)
                        validMove = false;
                    }
                    break;
+               default:
+                   break;
            }
            break;
        case 1:
@@ -176,6 +182,8 @@ bool moveCheck(int moveType, int curRow, int curCol)
                        validMove = false;
                    }
                    break;
+               default:
+                   break;
            }
            break;
        case 2:
@@ -189,6 +197,8 @@ bool moveCheck(int moveType, int curRow, int curCol)
                    if (moveType == 3 || moveType == 2) {
                        validMove = false;
                    }
+               default:
+                   break;
            }
            break;
        case 3:
@@ -202,6 +212,8 @@ bool moveCheck(int moveType, int curRow, int curCol)
                    if (moveType == 2) {
                        validMove = false;
                    }
+                   break;
+               default:
                    break;
            }
            break;
@@ -217,6 +229,8 @@ bool moveCheck(int moveType, int curRow, int curCol)
                        validMove = false;
                    }
                    break;
+               default:
+                   break;
            }
            break;
        case 5:
@@ -230,6 +244,8 @@ bool moveCheck(int moveType, int curRow, int curCol)
                    if (moveType == 2 || moveType == 4) {
                        validMove = false;
                    }
+                   break;
+               default:
                    break;
            }
            break;
@@ -245,6 +261,8 @@ bool moveCheck(int moveType, int curRow, int curCol)
                    if (moveType == 2 || moveType == 4) {
                        validMove = false;
                    }
+                   break;
+               default:
                    break;
            }
            break;
@@ -271,7 +289,11 @@ bool moveCheck(int moveType, int curRow, int curCol)
                        validMove = false;
                    }
                break;
+               default:
+                   break;
            }
+           break;
+       default:
            break;
    }
 
@@ -311,6 +333,8 @@ void removeExcess(square board[BOARD_SIZE][BOARD_SIZE], int curRow, int curCol, 
         board[curRow][curCol].num_pieces -= 1;
     }
 }
+
+//Function to place a piece on an empty square
 bool insert(square board[BOARD_SIZE][BOARD_SIZE], player players[2], int k, int t, int curPlayer)
 {
     bool insertionMade = false;
@@ -318,7 +342,7 @@ bool insert(square board[BOARD_SIZE][BOARD_SIZE], player players[2], int k, int 
     printf("You have selected a empty square.\n"
            "You currently have %d pieces in reserve.\n"
            "Would you like to insert a piece onto this position?\n"
-           "Type 1 for yes or 2 for no: ", players[curPlayer].dom_Pieces);
+           "Type 1 for yes or 2 for no: ", players[curPlayer].res_Pieces);
     scanf("%d", &choice);
     if(choice == 1)
     {
@@ -326,13 +350,15 @@ bool insert(square board[BOARD_SIZE][BOARD_SIZE], player players[2], int k, int 
       {
           case 0:
               set_red(&board[k][t]);
-              players[curPlayer].dom_Pieces -= 1;
+              players[curPlayer].res_Pieces -= 1;
               insertionMade = true;
               break;
           case 1:
               set_green(&board[k][t]);
-              players[curPlayer].dom_Pieces -= 1;
+              players[curPlayer].res_Pieces -= 1;
               insertionMade = true;
+              break;
+          default:
               break;
       }
       //Returning confirmation that a piece was inserted

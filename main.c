@@ -21,7 +21,8 @@ int main(void)
 
     while (gameEnd != true)
     {
-        if (movePoss(board, players, 0) == true) {
+        if (movePoss(board, players, 0) == true)
+        {
             playerTurn(players, board, 0);
             print_board(board);
         }
@@ -60,17 +61,22 @@ bool movePoss(square board[BOARD_SIZE][BOARD_SIZE], player players[2], int curPl
     {
         for(k=0;k<BOARD_SIZE;k++)
         {
-            if(board[t][k].stack->p_color == players[curPlayer].player_Colour)
+            if(board[t][k].stack != NULL)
             {
-                return true;
+                if(board[t][k].stack->p_color == players[curPlayer].player_Colour)
+                {
+                    return true;
+                }
             }
         }
     }
+
     //Checking if the player has any reserve pieces remaining
     if(players[curPlayer].res_Pieces != 0)
     {
         return true;
-    } else{
+    }
+    else{
         return false;
     }
 }
