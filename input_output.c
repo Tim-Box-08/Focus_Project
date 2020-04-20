@@ -1,7 +1,8 @@
+//Timothy O'Shea
+//19333841
+//Contains functionality for printing the board to the console
 #include <stdio.h>
 #include "input_output.h"
-
-
 
 /* Function to print the board:
  * Invalid Squares are printed as | - |

@@ -1,3 +1,6 @@
+//Timothy O'Shea
+//19333841
+//Contains functionality related to game initialisation
 #include <stdio.h>
 #include <stdlib.h>
 #include "game_init.h"

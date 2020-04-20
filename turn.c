@@ -1,6 +1,6 @@
-//
-// Created by ttoto on 03/04/2020.
-//
+//Timothy O'Shea
+//19333841
+//Contains all the functionality required for a player to take a turn in the game
 #include "game_init.h"
 #include "turn.h"
 #include <stdio.h>
@@ -45,6 +45,7 @@ void playerTurn(player players[2], square board[BOARD_SIZE][BOARD_SIZE], int cur
                     printf("\nThe square you selected belongs to the other player\n\nPlease select another square\n");
                 }
             }
+            //Statement will trigger if player selects an empty square on the board
             else
             {
                 if(players[curPlayer].res_Pieces > 0)
@@ -113,6 +114,7 @@ void playerTurn(player players[2], square board[BOARD_SIZE][BOARD_SIZE], int cur
     merge(board, k, t, curRow, curCol);//Call to merge function which will combine the two identified stacks
     board[k][t].stack = NULL;//Resets the pointer in the now vacant board square to NULL
     board[k][t].num_pieces = 0;//Resets the counter for the number of pieces on the now vacant board square to 0
+
     //Call to function will trigger if the stack contains more that 5 pieces
     if(board[curRow][curCol].num_pieces>5)
     {
@@ -339,11 +341,13 @@ bool insert(square board[BOARD_SIZE][BOARD_SIZE], player players[2], int k, int 
 {
     bool insertionMade = false;
     int choice;
+    //Gives player the option to select a non empty position
     printf("You have selected a empty square.\n"
            "You currently have %d pieces in reserve.\n"
            "Would you like to insert a piece onto this position?\n"
            "Type 1 for yes or 2 for no: ", players[curPlayer].res_Pieces);
     scanf("%d", &choice);
+
     if(choice == 1)
     {
       switch(curPlayer)
@@ -365,6 +369,7 @@ bool insert(square board[BOARD_SIZE][BOARD_SIZE], player players[2], int k, int 
       return insertionMade;
     }
     else{
+        //Return confirmation that an insertion was not made
         return insertionMade;
     }
 }
