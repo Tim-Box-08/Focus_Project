@@ -9,7 +9,7 @@
 
 //Function prototypes
 bool moveCheck(int moveType, int curRow, int curCol);
-void merge(square board[BOARD_SIZE][BOARD_SIZE],int k, int t, int curRow, int curCol);
+void merge(square board[BOARD_SIZE][BOARD_SIZE],int k, int t, int curRow, int curCol, int moveNum);
 void removeExcess(square board[BOARD_SIZE][BOARD_SIZE], int curRow, int curCol, player players[2], int curPlayer);
 bool insert(square board[BOARD_SIZE][BOARD_SIZE], player players[2], int k, int t, int curPlayer);
 
@@ -111,7 +111,7 @@ void playerTurn(player players[2], square board[BOARD_SIZE][BOARD_SIZE], int cur
         }
     }
 
-    merge(board, k, t, curRow, curCol);//Call to merge function which will combine the two identified stacks
+    merge(board, k, t, curRow, curCol, moveNum);//Call to merge function which will combine the two identified stacks
     board[k][t].stack = NULL;//Resets the pointer in the now vacant board square to NULL
     board[k][t].num_pieces = 0;//Resets the counter for the number of pieces on the now vacant board square to 0
 
@@ -123,18 +123,33 @@ void playerTurn(player players[2], square board[BOARD_SIZE][BOARD_SIZE], int cur
 }
 
 //Function to merge two stacks together
-void merge(square board[BOARD_SIZE][BOARD_SIZE], int k, int t, int curRow, int curCol)
+void merge(square board[BOARD_SIZE][BOARD_SIZE], int k, int t, int curRow, int curCol, int moveNum)
 {
+    int curPosition = 0;
     piece * curr;//Pointer to a struct of type piece
+    piece * next;
     curr = board[k][t].stack;//Curr is initialised with the address of the top of the stack to be added
     //While loop will continue execution until the bottom of the stack is reached
-    while(curr->next !=NULL)
+    while(curPosition < moveNum)
     {
         curr = curr->next;
+        curPosition++;
     }
-    curr->next = board[curRow][curCol].stack;//The pointer at the bottom of the stack is updated to point to the top of the other stack
-    board[curRow][curCol].stack = board[k][t].stack;//Makes it so that the board pointer now points to the new top of the stack
-    board[curRow][curCol].num_pieces += board[k][t].num_pieces;//Updates the counter for the number of pieces in the stack
+    
+    if(curr->next == NULL) {
+        curr->next = board[curRow][curCol].stack;//The pointer at the bottom of the stack is updated to point to the top of the other stack
+        board[curRow][curCol].stack = board[k][t].stack;//Makes it so that the board pointer now points to the new top of the stack
+        board[curRow][curCol].num_pieces += board[k][t].num_pieces;//Updates the counter for the number of pieces in the stack
+        board[k][t].stack = NULL;//Resets the pointer in the now vacant board square to NULL
+        board[k][t].num_pieces = 0;//Resets the counter for the number of pieces on the now vacant board square to 0
+    } else{
+        next = curr->next;
+        curr->next = board[curRow][curCol].stack;
+        board[curRow][curCol].stack = board[k][t].stack;
+        board[curRow][curCol].num_pieces += moveNum;
+        board[k][t].stack = next;
+        board[k][t].num_pieces -= moveNum;
+    }
 }
 
 //Function to check the validity of a player's move
