@@ -1,11 +1,10 @@
 //Timothy O'Shea
 //19333841
-//Program to allow two players to partake in a game of focus
+//Program to allow two players to take part in a game of focus
 #include "input_output.h"//Custom library containing functions required for game initialisation and input/output operations
 #include "turn.h"//Custom library containing the functionality required for player turns
 #include <stdbool.h>
 #include <stdio.h>
-
 //Function prototype
 bool movePoss(square board[BOARD_SIZE][BOARD_SIZE], player players[2], int curPlayer);
 
@@ -22,6 +21,8 @@ int main(void)
     initialize_board(board);//Call to initialize_board function which is contained within game_init.h
 
     print_board(board);//Call to print_board function which will print the initialised board
+
+    printf("N.B. Board indexing begins at 0 for both column and row specification\n\n");
 
     //Loop will continue until gameEnd is set to true
     while (gameEnd != true)
