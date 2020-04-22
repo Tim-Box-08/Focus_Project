@@ -22,8 +22,6 @@ int main(void)
 
     print_board(board);//Call to print_board function which will print the initialised board
 
-    printf("N.B. Board indexing begins at 0 for both column and row specification\n\n");
-
     //Loop will continue until gameEnd is set to true
     while (gameEnd != true)
     {

@@ -12,9 +12,11 @@
 
 void print_board(square board[BOARD_SIZE][BOARD_SIZE])
 {
-    printf("\n        ****** The Board ******        \n");
+    printf("\n           ****** The Board ******        \n");
+    printf("    00   01   02   03   04   05   06   07\n");
     for(int i = 0; i < BOARD_SIZE; i ++)
     {
+        printf("0%d", i);
         for (int j = 0; j < BOARD_SIZE; j++)
         {
             if(board[i][j].type == VALID)

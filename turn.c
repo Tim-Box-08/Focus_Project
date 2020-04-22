@@ -70,7 +70,7 @@ void playerTurn(player players[2], square board[BOARD_SIZE][BOARD_SIZE], int cur
     //Number of squares a piece will move is decide by size of stack
     for (moveNum = 0; moveNum < board[k][t].num_pieces; moveNum++)
     {
-        printf("\nYou are currently at position [%d][%d]\n", curRow, curCol);
+        printf("\nYou are currently at position [0%d][0%d]\n", curRow, curCol);
 
         printf("Please select a direction in which to move the piece\nEnter 1 for left, 2 for right, 3 for up and 4 for down or 5 to end movement at current position:");
         scanf("%d", &moveType);
