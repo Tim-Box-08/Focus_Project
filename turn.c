@@ -67,7 +67,7 @@ void playerTurn(player players[2], square board[BOARD_SIZE][BOARD_SIZE], int cur
     curRow = k;
     curCol = t;
 
-    //Number of squares a piece will move is decide by size of stack
+    //Number of squares a piece can move is decide by size of stack
     for (moveNum = 0; moveNum < board[k][t].num_pieces; moveNum++)
     {
         printf("\nYou are currently at position [0%d][0%d]\n", curRow, curCol);
@@ -374,15 +374,18 @@ bool insert(square board[BOARD_SIZE][BOARD_SIZE], player players[2], int k, int 
            "Type 1 for yes or 2 for no: ", players[curPlayer].res_Pieces);
     scanf("%d", &choice);
 
+    //Will trigger if player decides to place a piece
     if(choice == 1)
     {
       switch(curPlayer)
       {
+          //Red player piece is placed
           case 0:
               set_red(&board[k][t]);
               players[curPlayer].res_Pieces -= 1;
               insertionMade = true;
               break;
+              //Green player piece is placed
           case 1:
               set_green(&board[k][t]);
               players[curPlayer].res_Pieces -= 1;

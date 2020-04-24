@@ -5,14 +5,14 @@
 #include "turn.h"//Custom library containing the functionality required for player turns
 #include <stdbool.h>
 #include <stdio.h>
+
 //Function prototype
 bool movePoss(square board[BOARD_SIZE][BOARD_SIZE], player players[2], int curPlayer);
 
 int main(void)
 {
-    // declaration of the players and the board
-    player players[PLAYERS_NUM];
-    square board[BOARD_SIZE][BOARD_SIZE];
+    player players[PLAYERS_NUM];//Array to hold structs of player data
+    square board[BOARD_SIZE][BOARD_SIZE];//Deceleration of board
     bool gameEnd = false;//Bool to track game state
     int winning_Player, losing_Player;
 
@@ -21,6 +21,8 @@ int main(void)
     initialize_board(board);//Call to initialize_board function which is contained within game_init.h
 
     print_board(board);//Call to print_board function which will print the initialised board
+
+    printf("N.B. If moving a stack less than the maximum number of moves available\nit will be split between it's original and new position\n\n");
 
     //Loop will continue until gameEnd is set to true
     while (gameEnd != true)

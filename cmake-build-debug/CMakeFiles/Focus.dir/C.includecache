@@ -6,15 +6,13 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/ttoto/CLionProjects/Focus/game_init.h
-
-C:/Users/ttoto/CLionProjects/Focus/input_output.c
+C:/Users/ttoto/CLionProjects/Focus/game_init.c
 stdio.h
 -
-input_output.h
-C:/Users/ttoto/CLionProjects/Focus/input_output.h
-
-C:/Users/ttoto/CLionProjects/Focus/input_output.h
+stdlib.h
+-
 game_init.h
+C:/Users/ttoto/CLionProjects/Focus/game_init.h
+
 C:/Users/ttoto/CLionProjects/Focus/game_init.h
 
