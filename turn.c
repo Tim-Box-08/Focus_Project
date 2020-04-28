@@ -61,6 +61,9 @@ void playerTurn(player players[2], square board[BOARD_SIZE][BOARD_SIZE], int cur
                 }
             }
         }
+        else{
+            printf("\nPlease select a valid square on the board\n\n");
+        }
     }
 
     //curRow and curCol will act as a cursor used to track position on the board

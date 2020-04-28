@@ -1,0 +1,11 @@
+Assignment02 Design Doc
+
+The design brief of the project specified for assignment required us to create a basic implementation of the board game focus utilising stacks.
+I divided my project into four distinct modules along with the associated headers.
+My first file was main.c where execution would begin and to where execution would return at the end of every turn.
+I then added and finished the implementation of the file game_init.c provided to us as part of the tutorial.
+This contained all the relevant struct definitions in its header and the functions required to initialise the game.
+I also included input_output.c which provided the functionality required to print the board to the console.
+As the project progressed, I would make several alterations to how the board was displayed.
+The final module I worked on was turn.c which contained all the functionality required for a player to take a turn.
+This module contains a wide variety of functions which allowed a player to perform a variety of potential moves dependant on their position and the current state of the game.
